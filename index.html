@@ -8,7 +8,7 @@
   margin: 0;
   min-height: 100vh;                /* usar min-height para evitar recortes por barras móviles */
   display: block;
-  background: linear-gradient(120deg, #001f3f, #003366 30%, #1259a5 60%, #0a2342 80%, #1e3c72 100%);
+  background: linear-gradient(120deg, #001f3f, #003366 30%, #1259a5 60%, #315f9b 80%, #769dd6 100%);
   background-size: 300% 300%;
   animation: nightGradient 18s linear infinite;
   overflow-x: hidden;               /* evitar scroll horizontal en móvil */
@@ -211,19 +211,26 @@ h1 {
   <h1>¡Feliz día!<br>Tenga sus flores amarillas</h1>
   <div class="bouquet-row">
     <div class="flores">
-      <img src="./flores.png" alt="flores">
+      <img src="./assets/flores.png" alt="flores">
     </div>
     <div class="gato-center">
-      <img src="./gato.png" alt="gato" id="gato-img">
+      <img src="./assets/gato.png" alt="gato" id="gato-img">
     </div>
     <div class="flores">
-      <img src="./flores.png" alt="flores">
+      <img src="./assets/flores.png" alt="flores">
     </div>
   </div>
+
+
   <script>
     document.addEventListener("DOMContentLoaded", () => {
   // --- estrellas (ligero para no saturar) ---
-  const numStars = 120;
+  const sonidoFondo = new Audio('./assets/background.mp3');
+  sonidoFondo.volume = 0.10;
+  sonidoFondo.loop = true;
+  sonidoFondo.play();
+
+  const numStars = 100;
   for (let i = 0; i < numStars; i++) {
     const star = document.createElement("div");
     star.classList.add("star");
@@ -232,7 +239,7 @@ h1 {
     star.style.height = size;
     star.style.top = Math.random() * 100 + "vh";
     star.style.left = Math.random() * 100 + "vw";
-    star.style.animationDuration = (2 + Math.random() * 4) + "s";
+    star.style.animationDuration = (2 + Math.random() * 6) + "s";
     document.body.appendChild(star);
   }
 
@@ -244,11 +251,15 @@ h1 {
   const cat = getCat();
   if (cat) {
     cat.addEventListener('click', function () {
+      const sonido = new Audio('./assets/pop.mp3');
       const heart = document.createElement('span');
       heart.className = 'heart';
       heart.innerHTML = '&#10084;';
       this.parentElement.appendChild(heart);
-      setTimeout(() => heart.remove(), 1200); // sincronizado con la animación CSS
+      setTimeout(() => heart.remove(), 1500); // sincronizado con la animación CSS
+      
+      sonido.play();
+
     });
   }
 
@@ -256,11 +267,13 @@ h1 {
     flowers().forEach(flor => {
       flor.onclick = null;
       flor.addEventListener('click', function () {
+        const sonido = new Audio('./assets/pop-flores.mp3');
         const heartFlor = document.createElement('span');
         heartFlor.className = 'heart-flor';
         heartFlor.innerHTML = '&#10084;';
         this.parentElement.appendChild(heartFlor);
-        setTimeout(() => heartFlor.remove(), 1200); // sincronizado con la animación CSS
+        sonido.play();
+        setTimeout(() => heartFlor.remove(), 1500); // sincronizado con la animación CSS
       });
     });
   }
