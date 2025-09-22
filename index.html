@@ -224,7 +224,7 @@ h1 {
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-  // --- estrellas (ligero para no saturar) ---
+  
     document.addEventListener("click", () => {
       const sonidoFondo = new Audio('./assets/background.mp3');
     sonidoFondo.volume = 0.15;
@@ -232,7 +232,7 @@ h1 {
     sonidoFondo.play();
     }, { once: true }); // solo al primer click
   
-
+// --- estrellas (ligero para no saturar) ---
   const numStars = 100;
   for (let i = 0; i < numStars; i++) {
     const star = document.createElement("div");
