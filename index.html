@@ -225,10 +225,13 @@ h1 {
   <script>
     document.addEventListener("DOMContentLoaded", () => {
   // --- estrellas (ligero para no saturar) ---
-  const sonidoFondo = new Audio('./assets/background.mp3');
-  sonidoFondo.volume = 0.10;
-  sonidoFondo.loop = true;
-  sonidoFondo.play();
+    document.addEventListener("click", () => {
+      const sonidoFondo = new Audio('./assets/background.mp3');
+    sonidoFondo.volume = 0.15;
+    sonidoFondo.loop = true;
+    sonidoFondo.play();
+    }, { once: true }); // solo al primer click
+  
 
   const numStars = 100;
   for (let i = 0; i < numStars; i++) {
